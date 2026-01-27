@@ -22,13 +22,20 @@
   <meta name="twitter:image" content="https://mindset.adventuresinpharma.com/preview.jpg">
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
   <div class="logo">
     <img src="https://cdn.prod.website-files.com/67ab2a95777a506d08092426/67ab312121d804a41517cf6e_AIP%20Logo-min.png" alt="AIP Logo">
   </div>
-  
+
+  <div class="camera">
+    <video id="video" autoplay></video>
+    <button id="captureButton">Take photo</button>
+    <canvas id="canvas" style="display:none;"></canvas>
+    <img id="photo" src="" alt="The screen capture will appear in this box." />
+  </div>
+
   <div class="container quiz-container">
     <form id="quiz-form">
       
@@ -426,48 +433,60 @@
         mindsetType: 'skeptic',
         code: 'MACBOT',
         explanation: 'Your pharma AI mindset is skeptic. Like M.A.C.-Bot, you favour thoughtful, evidence-based approaches to AI adoption. You prioritise understanding fundamentals and proven results over chasing trends.',
-        image: 'characters/mac.png',
-        shareImage: 'sharegraphics/aip_im_mac.png'
+        characterId: 'mac',
+        prompt: 'Turn the guest into a comic stylised version of M.A.C.-Bot, using the supplied reference character.',
+        image: '../characters/mac.png',
+        shareImage: '../sharegraphics/aip_im_mac.png'
       },
       'nova': {
         name: 'Nova',
         mindsetType: 'observer',
         code: 'NOVA',
         explanation: 'Your pharma AI mindset is observer. Like Nova, you combine curiosity about AI\'s potential with healthy scepticism. You prefer observation and analysis before commitment, balancing optimism with realistic assessment.',
-        image: 'characters/nova.png',
-        shareImage: 'sharegraphics/aip_im_nova.png'
+        characterId: 'nova',
+        prompt: 'Turn the guest into a comic stylised version of Nova, using the supplied reference character.',
+        image: '../characters/nova.png',
+        shareImage: '../sharegraphics/aip_im_nova.png'
       },
       'groc': {
         name: 'Groc',
         mindsetType: 'realist',
         code: 'GROC',
         explanation: 'Your pharma AI mindset is realist. Like Groc, you balance optimism about AI\'s future with practical implementation concerns. You recognise potential while prioritising preparation and risk management.',
-        image: 'characters/groc.png',
-        shareImage: 'sharegraphics/aip_im_groc.png'
+        characterId: 'groc',
+        prompt: 'Turn the guest into a comic stylised version of Groc, using the supplied reference character.',
+        image: '../characters/groc.png',
+        shareImage: '../sharegraphics/aip_im_groc.png'
       },
       'jetpackjim': {
         name: 'Jetpack Jim',
         mindsetType: 'enthusiast',
         code: 'JETPACKJIM',
         explanation: 'Your pharma AI mindset is enthusiast. Like Jetpack Jim, you are enthusiastic about AI\'s transformational potential in pharma. You favor quick adoption for competitive advantage while maintaining professional and ethical standards.',
-        image: 'characters/jim.png',
-        shareImage: 'sharegraphics/aip_im_jim.png'
+        characterId: 'jim',
+        prompt: 'Turn the guest into a comic stylised version of Jetpack Jim, using the supplied reference character.',
+        image: '../characters/jim.png',
+        shareImage: '../sharegraphics/aip_im_jim.png'
       },
       'vega': {
         name: 'Vega Callisto',
         mindsetType: 'optimist',
         code: 'VEGA',
         explanation: 'Your pharma AI mindset is optimist. Like Vega Callisto, you are highly optimistic about AI\'s revolutionary potential. You view AI as fundamentally transforming pharmaceutical operations, from R&D to patient care.',
-        image: 'characters/vega.png',
-        shareImage: 'sharegraphics/aip_im_vega.png'
+        characterId: 'vega',
+        prompt: 'Turn the guest into a comic stylised version of Vega Callisto, using the supplied reference character.',
+        image: '../characters/vega.png',
+        shareImage: '../sharegraphics/aip_im_vega.png'
       },
       'dangerousdan': {
         name: 'Dangerous Dan',
         mindsetType: 'progressive',
         code: 'DANGEROUSDAN',
         explanation: 'Your pharma AI mindset is progressive. Like Dangerous Dan, you fully embrace AI as revolutionary for pharmaceuticals. You view AI adoption as essential for competitive advantage and readily embrace cutting-edge technologies.',
-        image: 'characters/dan.png',
-        shareImage: 'sharegraphics/aip_im_dan.png'
+        characterId: 'dan',
+        prompt: 'Turn the guest into a comic stylised version of Dangerous Dan, using the supplied reference character.',
+        image: '../characters/dan.png',
+        shareImage: '../sharegraphics/aip_im_dan.png'
       }
     };
 
@@ -686,6 +705,10 @@ Discover your pharma AI mindset and get an exclusive discount for Adventures In 
           document.getElementById('persona-title').textContent = `You're an AI ${persona.mindsetType}!`;
           document.getElementById('persona-explanation').innerHTML = `${persona.explanation}`;
           document.getElementById('discount-code').textContent = persona.code;
+          window.aipQuizResult = {
+            prompt: persona.prompt,
+            character: persona.characterId
+          };
           
           // Position spectrum indicator based on score
           const spectrumPosition = score; // 0-100
@@ -753,6 +776,10 @@ Discover your pharma AI mindset and get an exclusive discount for Adventures In 
           document.getElementById('persona-title').textContent = `You're an AI ${persona.mindsetType}!`;
           document.getElementById('persona-explanation').innerHTML = `${persona.explanation}`;
           document.getElementById('discount-code').textContent = persona.code;
+          window.aipQuizResult = {
+            prompt: persona.prompt,
+            character: persona.characterId
+          };
           
           // Position spectrum indicator based on score
           const spectrumPosition = score; // 0-100
@@ -875,6 +902,9 @@ Discover your pharma AI mindset and get an exclusive discount for Adventures In 
     window.addEventListener('resize', function() {
       adjustContainerHeight();
     });
+
+
   </script>
+  <script src="/static/app.js"></script>
 </body>
 </html>

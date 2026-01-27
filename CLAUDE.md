@@ -8,14 +8,14 @@ This is a pharma AI mindset quiz application for the AIP (Adventures In Pharma) 
 
 ## Architecture
 
-- **Single-page application**: All code is contained in `index.html` with external `styles.css`
+- **Single-page application**: All code is contained in `frontend/index.html` with external `frontend/styles.css`
 - **Styling**: Custom CSS with AIP brand colors (--aip-navy-blue, --aip-mustard, --aip-burnt-orange, --aip-white, --aip-cream)
 - **JavaScript**: Vanilla JavaScript for quiz flow, scoring, confetti effects, and Xano API integration
 - **Data collection**: Quiz results are posted to Xano backend API
 
 ## Development
 
-Since this is a static HTML application, no build process is required. Simply open `index.html` in a browser to view and test changes.
+Since this is a static HTML application, no build process is required. Simply open `frontend/index.html` in a browser to view and test changes.
 
 ## Quiz Flow
 
