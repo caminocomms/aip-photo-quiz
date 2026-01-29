@@ -4,3 +4,4 @@ This fork is to expand the quiz site to use external AI services to transform th
 
 Note: We won't be able to host this via GitHub pages as the functionality will need to use a backend Python and GitHub pages is limited to HTML and Basic JS. 
 
+uvicorn app.app:app --host 0.0.0.0 --port 8000
